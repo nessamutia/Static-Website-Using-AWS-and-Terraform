@@ -25,7 +25,7 @@ resource "aws_s3_bucket_public_access_block" "example" {
   restrict_public_buckets = false
 }
 
-
+# S3 BUCKET ACL
 resource "aws_s3_bucket_acl" "example" {
   depends_on = [aws_s3_bucket_ownership_controls.example]
 
@@ -33,7 +33,7 @@ resource "aws_s3_bucket_acl" "example" {
   acl    = "public-read"
 }
 
-
+# S3 OBJECT: index.html
 resource "aws_s3_object" "index" {
   bucket       = aws_s3_bucket.mybucket.id
   key          = "index.html"
@@ -42,6 +42,8 @@ resource "aws_s3_object" "index" {
   content_type = "text/html"
 }
 
+
+# S3 OBJECT: error.html
 resource "aws_s3_object" "error" {
   bucket       = aws_s3_bucket.mybucket.id
   key          = "error.html"
@@ -51,6 +53,7 @@ resource "aws_s3_object" "error" {
 }
 
 
+# S3 OBJECT: profile.gif
 resource "aws_s3_object" "profile" {
   bucket = aws_s3_bucket.mybucket.id
   key    = "profile.gif"
@@ -59,6 +62,8 @@ resource "aws_s3_object" "profile" {
 }
 
 
+
+# S3 BUCKET WEBSITE CONFIGURATION
 resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.mybucket.id
   index_document {
